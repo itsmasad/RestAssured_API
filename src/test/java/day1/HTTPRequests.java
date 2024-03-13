@@ -55,13 +55,14 @@ public class HTTPRequests {
 			.log().all();  */
 	}
 	
-	@Test(priority = 3)
+	// this test will only be executed if the createUser test is pass
+	@Test(priority = 3,dependsOnMethods = {"createUser"})
 	void updateUser(){
 
 		// Creating the data by using HashMap
 		HashMap data = new HashMap<>();
 		data.put("name", "Asad");
-		data.put("job", "SQA");
+		data.put("job", "Senior SQA");
 
 		// Creating a variable before given section
 		given()
@@ -72,13 +73,13 @@ public class HTTPRequests {
 
 		.when()
 		// Sending the post request
-		.post("https://reqres.in/api/users/"+id)
+		.put("https://reqres.in/api/users/"+id)
 		// getting the value of the key from the response
 		
 
 		.then()
 			// Validating the response code
-			.statusCode(201)
+			.statusCode(200)
 			// Printing the response
 			.log().all();  
 	}
