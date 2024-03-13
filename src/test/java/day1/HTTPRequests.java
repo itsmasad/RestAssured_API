@@ -11,7 +11,7 @@ public class HTTPRequests {
 	// Setting global variable
 	int id;
 
-    @Test
+    @Test(priority = 1)
     void getUsers() {
    
     	when()
@@ -27,7 +27,7 @@ public class HTTPRequests {
     	.log().all();
     }
 
-	@Test
+	@Test(priority = 2)
 	void createUser(){
 
 		// Creating the data by using HashMap
@@ -35,7 +35,8 @@ public class HTTPRequests {
 		data.put("name", "Asad");
 		data.put("job", "SQA");
 
-		given()
+		// Creating a variable before given section
+		id=given()
 		// #Specifying the content type and the body
 			.contentType("application/json")
 			// Sending the data
@@ -53,5 +54,35 @@ public class HTTPRequests {
 			// Printing the response
 			.log().all();  */
 	}
+	
+	@Test(priority = 3)
+	void updateUser(){
+
+		// Creating the data by using HashMap
+		HashMap data = new HashMap<>();
+		data.put("name", "Asad");
+		data.put("job", "SQA");
+
+		// Creating a variable before given section
+		given()
+		// #Specifying the content type and the body
+			.contentType("application/json")
+			// Sending the data
+			.body(data)
+
+		.when()
+		// Sending the post request
+		.post("https://reqres.in/api/users/"+id)
+		// getting the value of the key from the response
+		
+
+		.then()
+			// Validating the response code
+			.statusCode(201)
+			// Printing the response
+			.log().all();  
+	}
+
+
 
 }
