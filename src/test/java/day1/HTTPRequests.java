@@ -84,6 +84,18 @@ public class HTTPRequests {
 			.log().all();  
 	}
 
+	// this test will only be executed if the updateUser test is pass
+	@Test(priority = 4,dependsOnMethods = {"updateUser"})
+	void deleteUser(){
+
+		given()
+
+		.when()
+			.delete("https://reqres.in/api/users/"+id)
+		.then()
+			.statusCode(204)
+			.log().all();
+	}
 
 
 }
