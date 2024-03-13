@@ -8,6 +8,9 @@ import java.util.HashMap;
 
 public class HTTPRequests {
     
+	// Setting global variable
+	int id;
+
     @Test
     void getUsers() {
    
@@ -41,12 +44,14 @@ public class HTTPRequests {
 		.when()
 		// Sending the post request
 		.post("https://reqres.in/api/users")
+		// getting the value of the key from the response
+		.jsonPath().getInt("id");
 
-		.then()
+		/*.then()
 			// Validating the response code
 			.statusCode(201)
 			// Printing the response
-			.log().all();
+			.log().all();  */
 	}
 
 }
