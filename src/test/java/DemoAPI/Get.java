@@ -1,6 +1,8 @@
 package DemoAPI;
 
 import static io.restassured.RestAssured.*;
+import org.hamcrest.*;
+import java.util.regex.Matcher;
 import org.testng.annotations.Test;
 
 public class Get {
@@ -11,7 +13,7 @@ public class Get {
         when()
             .get("https://reqres.in/api/users?page=2")
         .then()
-            .statusCode(200);
-            // Add more assertions as needed, such as validating response body, headers, etc.
+            .statusCode(200)
+            .body("page",Matchers.equalTo(2))
     }
 }
