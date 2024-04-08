@@ -1,9 +1,11 @@
 package DemoAPI;
 
-import static io.restassured.RestAssured.*;
-import org.hamcrest.*;
-import java.util.regex.Matcher;
+
+import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+
+import java.util.HashMap;
 
 public class Get {
 
@@ -14,6 +16,6 @@ public class Get {
             .get("https://reqres.in/api/users?page=2")
         .then()
             .statusCode(200)
-            .body("page",Matchers.equalTo(2))
+            .body("page", Matchers.equalTo(2));
     }
 }
